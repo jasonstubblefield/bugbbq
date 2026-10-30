@@ -103,6 +103,23 @@ Or symlink the folders instead of copying, so `git pull` updates them.
 Install all six together. They share files (`bbq-find-bugs/filing.md`,
 `bbq-find-ui-bugs/verify-ui-fix.md`) and expect to sit next to each other.
 
+### Uninstall
+
+If you installed with the skills CLI:
+
+```bash
+npx skills remove bbq-convert-to-jira bbq-find-bugs bbq-find-ui-bugs bbq-fix-all-bugs bbq-fix-bugs bbq-review-fix-prs -g -y
+```
+
+If you copied the folders by hand, delete them:
+
+```bash
+rm -rf ~/.claude/skills/bbq-* ~/.codex/skills/bbq-*
+```
+
+Either way, `~/.config/bugbbq/` (saved Jira project choices) is yours to
+delete or keep. Nothing else is written outside your repos.
+
 ## Quick start
 
 In a repo with a GitHub remote:
