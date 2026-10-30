@@ -41,8 +41,12 @@ One of:
 - **verified**: the reproduction no longer shows the bug, and nothing new broke
   on that page
 - **still broken**: what you saw
-- **couldn't check**: why (e.g. needs production data, needs a login you don't
-  have, the app wouldn't start)
+- **couldn't check**: why (e.g. needs production data, needs a login and I
+  wasn't there to do it, the app wouldn't start)
+
+If the page needs a login, follow the Logins section of bbq-find-ui-bugs:
+ask me to log in in the Chrome or Safari tab. Never look up or fill in a
+password yourself.
 
 Put the result in the PR body or a PR comment: `UI check (<browser>): <result>`.
 

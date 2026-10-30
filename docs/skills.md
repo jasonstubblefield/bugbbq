@@ -104,10 +104,16 @@ main navigation and primary calls to action, flows you named, a dark-mode pass,
 a 390px phone-width pass, screenshots to confirm layout bugs, and clicking
 suspected dead links. Style nits, pixel alignment and copy don't count.
 
-If the site needs a login, it looks in the macOS Keychain
-(`security find-internet-password -s <host>`). The password goes through the
-agent's tool output to log in and must not be repeated in chat or issues.
-Skip this by logging in yourself and using the Chrome or Safari backend.
+**Logins.** The agent never reads or types your credentials: no Keychain, no
+password manager, no `.env`, no asking you to paste a password or 2FA code.
+When a page needs a login in Chrome or Safari, it leaves the tab on the login
+page and asks you to sign in there yourself, then continues on your word.
+Password managers, passkeys and 2FA all work because the login happens in
+your own browser. Playwright's browser is headless and can't be logged into,
+so for pages behind a login the skill switches to Chrome or Safari if one is
+available, or scans the public pages and lists what it skipped. If you know
+the pages need a login, say so when you invoke the skill and it starts with
+Chrome.
 
 Writes: GitHub issues with the `ui` label, same confirmation flow as
 `bbq-find-bugs`.
