@@ -43,8 +43,13 @@ If $ARGUMENTS has `--browser playwright|chrome|safari`, use that one. Otherwise
 use the first one available, in this order:
 1. **Playwright** (`mcp__playwright__*`): a clean, separate browser, and the only
    one that can emulate dark mode
-2. **Chrome** (`mcp__claude-in-chrome__*`): my real Chrome, already logged in
-3. **Safari** (`mcp__safari-mcp__*`): my real Safari, already logged in
+2. **Chrome** (`mcp__claude-in-chrome__*`): my real Chrome, with my sessions
+3. **Safari** (`mcp__safari-mcp__*`): my real Safari, with my sessions
+
+Exception: if I said the pages need a login, or the target is a dashboard,
+account or admin URL, start with Chrome, then Safari, then Playwright. The
+real browsers already hold my sessions, and when they don't, I can log in
+there myself (see Logins).
 
 A tool can be listed as deferred rather than loaded. Load what you need with
 ToolSearch in one call, and treat a backend as available only if its tools
@@ -76,17 +81,35 @@ for each backend's limits.
 
 - `gh auth status` fails
 - none of the three browsers is available (see "Pick a browser" for what to say)
-- the site needs a login, I'm not already logged in, and the macOS Keychain
-  has none for this host
+- the site needs a login and I decline to log in when asked (see Logins)
 
 ## Logins
 
-If the site asks for basic auth or a login, look it up in the login keychain:
-- username: `security find-internet-password -s <host> | awk -F'"' '/"acct"/{print $4}'`
-- password: `security find-internet-password -s <host> -w`
-- if there's no internet password, try `security find-generic-password -s <host> -w`
+You never handle my credentials. Don't read the Keychain, password managers,
+`.env` files, environment variables or browser storage for them, don't ask me
+to type a password or a 2FA code into the chat, and don't fill a login form
+with a password from anywhere. If a credential ever appears in a tool result
+or screenshot, don't repeat it anywhere.
 
-Use the password only to log in. Never repeat it in chat, screenshots or issue bodies.
+When a page needs a login (login form, basic auth prompt, or a redirect to
+sign in):
+
+- **Chrome or Safari**: hand the login to me. Leave the tab on the login page,
+  then ask with AskUserQuestion, telling me which browser and tab to use.
+  Options: **Logged in, continue** (reload the page and carry on; if it's
+  still the login page, ask once more) and **Skip pages that need a login**
+  (scan what's public and list the skipped pages in the summary). I may use a
+  password manager, passkey or 2FA in that window; that's fine, it stays in
+  the browser.
+- **Playwright**: its browser has no sessions and I can't log into it (it's
+  usually headless). If Chrome or Safari is available, switch to it for the
+  pages that need a login, keep Playwright for the public pages and the
+  dark-mode pass, and say in the summary which backend covered what. If
+  neither is available, scan the public pages only, and list the pages that
+  needed a login in the summary.
+
+Don't log out of anything, change account settings, or sign into a different
+account than the one I'm already using.
 
 ## What counts as a real UI bug
 

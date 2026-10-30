@@ -102,9 +102,11 @@ The first run creates the labels it needs (`bug`, `agent-found`, `ui`).
   branch's own test job still gates the deploy if the workflow is built that
   way. Read [the merge section](docs/skills.md#merging-and-deploying) before
   using it on something that matters.
-- `/bbq-find-ui-bugs` can look up site logins in the macOS Keychain. The
-  password passes through the agent's tool output. If that's not acceptable,
-  log in yourself in Chrome or Safari and use that backend.
+- The agent never touches your credentials. When a page needs a login,
+  `/bbq-find-ui-bugs` leaves the tab on the login page and asks you to sign in
+  yourself in Chrome or Safari, password manager, passkeys and 2FA included.
+  Playwright's browser can't be logged into, so pages behind a login go
+  through Chrome or Safari, or are skipped and listed.
 
 ## License
 

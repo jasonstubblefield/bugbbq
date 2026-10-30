@@ -20,12 +20,15 @@ Playwright `mcp__playwright__`, Chrome `mcp__claude-in-chrome__`, Safari `mcp__s
 
 ## Differences that matter
 
-**Playwright** runs its own browser with no saved sessions. Logins come from the
-Keychain (see SKILL.md). It's the only backend that can emulate dark mode.
+**Playwright** runs its own browser with no saved sessions, usually headless,
+so nobody can log into it. Use it for public pages and the dark-mode pass; for
+pages behind a login, switch to Chrome or Safari (see Logins in SKILL.md).
+It's the only backend that can emulate dark mode.
 
-**Chrome** is my real Chrome profile, so I'm probably already logged in. Try the
-page before looking up Keychain logins. Because it's my real account, anything
-you submit is done as me: follow the form rule in SKILL.md strictly. Load the
+**Chrome** is my real Chrome profile, so I'm probably already logged in. If a
+page asks for a login, leave the tab there and ask me to log in myself (see
+Logins in SKILL.md). Because it's my real account, anything you submit is
+done as me: follow the form rule in SKILL.md strictly. Load the
 `anthropic-skills:chrome-browser` skill before the first Chrome call.
 - Phone width: `resize_window` resizes the whole window, and Chrome usually won't
   go below about 500px. After resizing, check `window.innerWidth` with
