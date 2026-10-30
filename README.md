@@ -10,14 +10,36 @@ some limits, Codex CLI) and talk to GitHub through the `gh` CLI.
  find UI bugs┘    (bug, agent-found)  fix all (yolo)                └──> or convert to Jira
 ```
 
-| Skill | What it does |
-|---|---|
-| `/bbq-find-bugs <path>` | Reviews code for real correctness bugs, verifies each one, and files it as a GitHub issue after you say yes. |
-| `/bbq-find-ui-bugs <url>` | Scans a running site in a browser (Playwright, Chrome or Safari): console errors, broken requests, dead links, layout and dark-mode breakage, phone width, accessibility blockers. Files issues the same way. |
-| `/bbq-fix-bugs` | Lists open bugs, recommends three, fixes the one you pick in its own git worktree, then opens a PR or merges and deploys on your say-so. |
-| `/bbq-fix-all-bugs` | Yolo mode. Fixes every open agent-found bug in parallel with subagents, one draft PR each. Nothing is merged. |
-| `/bbq-review-fix-prs` | Walks through the fix PRs one at a time with a short assessment, and merges and deploys, fixes further, closes or skips each one. |
-| `/bbq-convert-to-jira` | Moves agent-found GitHub issues into a Jira project backlog and closes them with a link. |
+**Find**
+
+- **`/bbq-find-bugs <path>`**
+  Reviews code for real correctness bugs, verifies each one, and files it as a
+  GitHub issue after you say yes.
+- **`/bbq-find-ui-bugs <url>`**
+  Scans a running site in a browser (Playwright, Chrome or Safari) for console
+  errors, broken requests, dead links, layout and dark-mode breakage, phone
+  width problems and accessibility blockers. Files issues the same way.
+
+**Fix**
+
+- **`/bbq-fix-bugs`**
+  Lists open bugs, recommends three, fixes the one you pick in its own git
+  worktree, then opens a PR or merges and deploys on your say-so.
+- **`/bbq-fix-all-bugs`**
+  Yolo mode. Fixes every open agent-found bug in parallel with subagents, one
+  draft PR each. Nothing is merged.
+
+**Ship**
+
+- **`/bbq-review-fix-prs`**
+  Walks through the fix PRs one at a time with a short assessment. For each
+  one you choose: merge and deploy, fix further, close, or skip.
+
+**Hand off**
+
+- **`/bbq-convert-to-jira`**
+  Moves agent-found GitHub issues into a Jira project backlog and closes them
+  with a link.
 
 Full details for each skill, the conventions they share, and how to customize
 them are in **[docs/skills.md](docs/skills.md)**.
