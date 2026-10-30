@@ -61,11 +61,15 @@ them are in **[docs/skills.md](docs/skills.md)**.
 ### With the skills CLI (recommended)
 
 ```bash
-npx skills add jasonstubblefield/bugbbq -g --all
+npx skills add jasonstubblefield/bugbbq -g -y -s '*' -a claude-code,codex
 ```
 
-This installs all six skills for every agent it finds on your machine
-(Claude Code, Codex and others). Update later with `npx skills update`.
+This installs all six skills for Claude Code and Codex. Drop either name from
+`-a` if you only use one of them. Update later with `npx skills update`.
+
+Don't use `--all`: it also targets agents that have no user-level skills
+folder and prints a failure line for each, even though the install for Claude
+Code and Codex went through.
 
 ### By asking your agent
 

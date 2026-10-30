@@ -257,6 +257,10 @@ Edit the `SKILL.md` files; they're instructions, not code. Common changes:
 ## Troubleshooting
 
 - **"gh isn't authenticated."** `gh auth login`, then rerun.
+- **`npx skills add` prints "Eve does not support global skill installation"**
+  (or PromptScript). You ran it with `--all`, which targets every agent the
+  CLI knows. The Claude Code and Codex installs still succeeded; check with
+  `npx skills ls -g`. Next time use `-a claude-code,codex`.
 - **`gh issue create` fails on a label.** The find skills create `bug`,
   `agent-found` and `ui` first; if your account can't create labels, ask a
   repo admin to add them.
